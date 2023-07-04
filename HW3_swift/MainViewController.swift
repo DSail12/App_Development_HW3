@@ -8,6 +8,7 @@
 import UIKit
 import WebKit
 
+
 final class MainViewController: UIViewController, WKNavigationDelegate {
 
     private lazy var webView: WKWebView = {
@@ -16,6 +17,7 @@ final class MainViewController: UIViewController, WKNavigationDelegate {
         
         return webView
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,7 @@ final class MainViewController: UIViewController, WKNavigationDelegate {
             webView.load(request)
         }
     }
+    
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         guard let url = navigationResponse.response.url, url.path == "/blank.html", let fragment = url.fragment else {
@@ -45,6 +48,7 @@ final class MainViewController: UIViewController, WKNavigationDelegate {
                 
                 return dict
             }
+        
         let token = params["access_token"] ?? ""
         let userID = params["user_id"] ?? ""
         print(token as String)
@@ -57,6 +61,7 @@ final class MainViewController: UIViewController, WKNavigationDelegate {
         navigationController?.pushViewController(tabBarController, animated: true)
     }
 
+    
     private func setupTabBarController(withToken token: String, andUserId userID: String) -> UITabBarController {
         let tabBarController = UITabBarController()
 
@@ -105,3 +110,4 @@ final class MainViewController: UIViewController, WKNavigationDelegate {
     }
 
 }
+
